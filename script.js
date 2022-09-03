@@ -3,34 +3,62 @@
 // Например, для числа 245 мы должны получить следующий объект: {‘единицы’: 5, ‘десятки’: 4, ‘сотни’: 2}.
 // Если число превышает 999, необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
 
+
 function getObjectFromNumber(num) {
+    if (typeof num !== 'number' || num > 999 || num < 0) {
+        return console.log('Введите число от 0 999.');
+    }
+
     let numString = String(num);
-    let arrayNum = Array.from(numString);
+    let arrayNum = Array.from(numString).reverse();
+
     let obj = {
         units: 0,
         tens: 0,
         hundreds: 0,
     };
 
-    if (num > 999 || num < 0 || typeof num !== 'number') {
-        return console.log('Введите число от 0 999.');
+    if (arrayNum.length >= 3) {
+        obj.hundreds = parseInt(arrayNum[2], 10);
     }
+    if (arrayNum.length >= 2) {
+        obj.tens = parseInt(arrayNum[1], 10);
+    }
+    obj.units = parseInt(arrayNum[0], 10);
 
-    if (num > 99) {
-        obj.units = +arrayNum[2];
-        obj.tens = +arrayNum[1];
-        obj.hundreds = +arrayNum[0];
-    } else if (num > 9) {
-        obj.units = arrayNum[1];
-        obj.tens = arrayNum[0];
-    } else if (num < 10) {
-        obj.units = arrayNum[0];
-    }
-    return console.log(obj);
+    return obj;
 
 };
+console.log(getObjectFromNumber(658));
 
-getObjectFromNumber(658);
+// function getObjectFromNumber(num) {
+//     if (typeof num !== 'number' || num > 999 || num < 0) {
+//         return console.log('Введите число от 0 999.');
+//     }
+
+//     let numString = String(num);
+//     let arrayNum = Array.from(numString);
+//     let obj = {
+//         units: 0,
+//         tens: 0,
+//         hundreds: 0,
+//     };
+
+//     if (num > 99) {
+//         obj.units = arrayNum[2];
+//         obj.tens = arrayNum[1];
+//         obj.hundreds = arrayNum[0];
+//     } else if (num > 9) {
+//         obj.units = arrayNum[1];
+//         obj.tens = arrayNum[0];
+//     } else if (num < 10) {
+//         obj.units = arrayNum[0];
+//     }
+//     return obj;
+
+// };
+
+
 
 
 // 2.Продолжить работу с интернет-магазином:
